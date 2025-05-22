@@ -43,11 +43,10 @@ btnScrollTo.addEventListener("click", function (e) {
   console.log(e.target.getBoundingClientRect());
 
   console.log("Current scroll (X/Y)", window.pageXOffset, window.pageYOffset);
-
   section1.scrollIntoView({ behavior: "smooth" });
 });
 
-// Page Navigation
+// Page navigation
 document.querySelector(".nav__links").addEventListener("click", function (e) {
   e.preventDefault();
 
@@ -103,7 +102,6 @@ const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-
   if (!entry.isIntersecting) nav.classList.add("sticky");
   else nav.classList.remove("sticky");
 };
@@ -146,7 +144,6 @@ const loadImg = function (entries, observer) {
 
   if (!entry.isIntersecting) return;
 
-  // Replace src with data-src
   entry.target.src = entry.target.dataset.src;
 
   entry.target.addEventListener("load", function () {
@@ -199,6 +196,7 @@ const slider = function () {
       (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
     );
   };
+
   // Next slide
   const nextSlide = function () {
     if (curSlide === maxSlide - 1) {
@@ -224,7 +222,6 @@ const slider = function () {
   const init = function () {
     goToSlide(0);
     createDots();
-
     activateDot(0);
   };
   init();
@@ -240,9 +237,6 @@ const slider = function () {
 
   dotContainer.addEventListener("click", function (e) {
     if (e.target.classList.contains("dots__dot")) {
-      // BUG in v2: This way, we're not keeping track of the current slide when clicking on a slide
-      // const { slide } = e.target.dataset;
-
       curSlide = Number(e.target.dataset.slide);
       goToSlide(curSlide);
       activateDot(curSlide);
